@@ -15,11 +15,11 @@
 
 <script>
 export default {
-    methods: {
-      getImgUrl(value) {
-          return `https://picsum.photos/id/43${value}/1230/500`
-      }
+  methods: {
+    getImgUrl (value) {
+      return `https://picsum.photos/id/43${value}/1230/500`
     }
+  }
 }
 </script>
 

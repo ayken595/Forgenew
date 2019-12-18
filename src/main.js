@@ -19,6 +19,8 @@ import App from './App.vue'
 /* Vue. Component in recursion */
 import AsideMenuList from '@/components/AsideMenuList'
 
+import { create } from 'apisauce'
+
 /* Collapse mobile aside menu on route change */
 router.afterEach(() => {
   store.commit('asideMobileStateToggle', false)
@@ -37,9 +39,6 @@ new Vue({
   render: h => h(App)
 }).$mount('#app')
 
-import { create } from 'apisauce'
-
 export const api = create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'http://localhost:3000'
 })
-

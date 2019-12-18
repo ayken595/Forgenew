@@ -82,7 +82,7 @@ export default {
     checkable: {
       type: Boolean,
       default: false
-    },
+    }
   },
   data () {
     return {

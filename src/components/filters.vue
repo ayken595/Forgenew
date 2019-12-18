@@ -1,69 +1,70 @@
 <template>
   <section>
-    <div class="container" style="min-height:0px;">
+    <div class="container">
       <div class="onethree">
-        <table style="max-width:300px">
+        <table class="onethree" style="max-width:150px; border-top:0px solid #222 border-collapse: collapse;
+  border-radius: 0;
+  overflow: hidden;">
           <td>Activity</td>
           <tr>
-            <select
+            <b-select
+              rounded
               name="Activity"
               @change="onChange($event)"
               class="form-control"
               v-model="key"
-              style="min-width:300px"
+              style="min-width:150px"
             >
               <option value="1">Active</option>
               <option value="2">In-active</option>
               <option value="3">In-Work</option>
-            </select>
+            </b-select>
           </tr>
           <td>Brand</td>
           <tr>
-            <select
+            <b-select
               name="Activity"
               @change="onChange($event)"
               class="form-control"
               v-model="key"
-              style="min-width:300px"
+              style="min-width:150px"
+              rounded
             >
               <option value="1">Chujke</option>
               <option value="2">Abibas</option>
               <option value="3">Rejbok</option>
-            </select>
+            </b-select>
           </tr>
           <td>Language</td>
           <tr>
-            <select
+            <b-select
               name="Language"
               @change="onChange($event)"
               class="form-control"
               v-model="key"
-              style="min-width:300px"
+              size:7
+              rounded
             >
               <option value="1">Eng</option>
               <option value="2">Pl</option>
               <option value="3">Fr</option>
-            </select>
+            </b-select>
           </tr>
         </table>
         <!--SEARCH BY FILTER -->
-        <input
-          class="form-control"
-          type="text"
-          v-model="searchQuery"
-          placeholder="Search"
-          style="display:block; margin:auto;"
-        />
+        <b-field>
+            <b-input placeholder="Search everywhere..."  style="padding-top:30px; max-width:200px;"></b-input>
+        </b-field>
       </div>
       <div class="onethree">
         Price<br/>
         <div style="display:flex;justify-content:space-between;">
-        <span>{{numbers[0]}}</span> 
+        <span>{{numbers[0]}}</span>
         <span>{{numbers[1]}}</span>
 
         </div>
         <b-field>
-          <b-slider v-model="numbers" :min="1" :max="3000" :step="5" ticks></b-slider>
+          <b-slider :key="minmax" v-model="numbers" :min="1" :max="3000" :step="5" ticks></b-slider>
         </b-field>
       </div>
       <div style="clear:both"></div>
@@ -73,30 +74,31 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       numbers: [1, 3000],
+      searchQuery: '',
       selectedOptions: [],
-      searchQuery: ""
-    };
+      minmax: ''
+    }
   },
   computed: {
-    filteredResources() {
-      console.log(searchQuery);
-      if (this.searchQuery) {
-        return this.filter(item => {
-          return item.title.startsWith(this.searchQuery);
-        });
-      } else {
-        return this.askForPosts();
-      }
-    }
+
   }
-};
+}
 </script>
 <style>
+.container{
+  background-color:#fff;
+  padding:50px;
+  width:100%;
+  border-top:1px solid #666;
+  border-collapse: collapse;
+  border-radius: 1em;
+  overflow: hidden;
+}
 .scope {
-  max-width: 30%;
+  max-width: 20%;
 }
 .selector {
   float: left;
@@ -114,6 +116,9 @@ export default {
   width:40%;
   display:block;
   margin:auto;
+}
+.onethree tr:nth-child(even){
+  background-color: #fff;
 }
 
 @media only screen and (max-width: 1024px){

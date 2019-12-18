@@ -22,20 +22,20 @@
 
 <script>
 export default {
-  data() {
+  data () {
     return {
       total: 200,
       current: 10,
       perPage: 10,
       rangeBefore: 3,
       rangeAfter: 1,
-      order: "",
-      size: "",
+      order: '',
+      size: '',
       isSimple: false,
       isRounded: false,
-      prevIcon: "chevron-left",
-      nextIcon: "chevron-right"
-    };
+      prevIcon: 'chevron-left',
+      nextIcon: 'chevron-right'
+    }
   }
-};
+}
 </script>
