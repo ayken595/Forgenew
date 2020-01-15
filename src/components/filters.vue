@@ -2,17 +2,19 @@
   <section>
     <div class="container">
       <div class="onethree">
-        <table class="onethree" style="max-width:150px; border-top:0px solid #222 border-collapse: collapse;
+        <table
+          class="onethree"
+          style="max-width:150px; border-top:0px solid #222 border-collapse: collapse;
   border-radius: 0;
-  overflow: hidden;">
+  overflow: hidden;"
+        >
           <td>Activity</td>
           <tr>
             <b-select
               rounded
               name="Activity"
-              @change="onChange($event)"
               class="form-control"
-              v-model="key"
+              v-model="model.activity"
               style="min-width:150px"
             >
               <option value="1">Active</option>
@@ -24,11 +26,11 @@
           <tr>
             <b-select
               name="Activity"
-              @change="onChange($event)"
               class="form-control"
-              v-model="key"
+              v-model="brand"
               style="min-width:150px"
               rounded
+              @change="askForFilters()"
             >
               <option value="1">Chujke</option>
               <option value="2">Abibas</option>
@@ -39,11 +41,11 @@
           <tr>
             <b-select
               name="Language"
-              @change="onChange($event)"
               class="form-control"
-              v-model="key"
+              v-model="model.lang"
               size:7
               rounded
+              @change="askForFilters()"
             >
               <option value="1">Eng</option>
               <option value="2">Pl</option>
@@ -53,18 +55,18 @@
         </table>
         <!--SEARCH BY FILTER -->
         <b-field>
-            <b-input placeholder="Search everywhere..."  style="padding-top:30px; max-width:200px;"></b-input>
+          <b-input placeholder="Search everywhere..." style="padding-top:30px; max-width:200px;"></b-input>
         </b-field>
       </div>
       <div class="onethree">
-        Price<br/>
+        Price
+        <br />
         <div style="display:flex;justify-content:space-between;">
-        <span>{{numbers[0]}}</span>
-        <span>{{numbers[1]}}</span>
-
+          <span>{{numbers[0]}}</span>
+          <span>{{numbers[1]}}</span>
         </div>
         <b-field>
-          <b-slider :key="minmax" v-model="numbers" :min="1" :max="3000" :step="5" ticks></b-slider>
+          <b-slider v-model="numbers" :min="1" :max="3000" :step="5" ticks lazy @change="askForFilters()"></b-slider>
         </b-field>
       </div>
       <div style="clear:both"></div>
@@ -79,20 +81,49 @@ export default {
       numbers: [1, 3000],
       searchQuery: '',
       selectedOptions: [],
-      minmax: ''
+      activity: '',
+      brand: '',
+      lang: '',
+      model: {
+        activity: '',
+        lang: ''
+      }
     }
   },
   computed: {
-
+    filtersComposed () {
+      let filters = {
+        activity: this.activity,
+        lang: this.lang,
+        brand: this.brand
+      }
+      return Object.entries(filters).map(([key, val]) => `${key}=${val}`).join('&')
+    }
+  },
+  methods: {
+    async askForFilters () {
+      console.log(this.filtersComposed)
+    }
+  },
+  watch: {
+    activity (val, oldVal) {
+      this.askForFilters()
+    },
+    model: {
+      handler () {
+        this.askForFilters()
+      },
+      deep: true
+    }
   }
 }
 </script>
 <style>
-.container{
-  background-color:#fff;
-  padding:50px;
-  width:100%;
-  border-top:1px solid #666;
+.container {
+  background-color: #fff;
+  padding: 50px;
+  width: 100%;
+  border-top: 1px solid #666;
   border-collapse: collapse;
   border-radius: 1em;
   overflow: hidden;
@@ -111,22 +142,21 @@ export default {
   width: 300px;
   margin-left: 75px;
 }
-.onethree{
-  float:left;
-  width:40%;
-  display:block;
-  margin:auto;
+.onethree {
+  float: left;
+  width: 40%;
+  display: block;
+  margin: auto;
 }
-.onethree tr:nth-child(even){
+.onethree tr:nth-child(even) {
   background-color: #fff;
 }
 
-@media only screen and (max-width: 1024px){
-  .onethree{
-    float:none;
-    margin:0px;
-    width:100%;
+@media only screen and (max-width: 1024px) {
+  .onethree {
+    float: none;
+    margin: 0px;
+    width: 100%;
   }
 }
-
 </style>

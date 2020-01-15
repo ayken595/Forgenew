@@ -40,5 +40,5 @@ new Vue({
 }).$mount('#app')
 
 export const api = create({
-  baseURL: 'http://localhost:3000'
+  baseURL: 'http://localhost:3002'
 })

@@ -172,27 +172,27 @@ export default {
           datatype: 'string',
           query: ''
         },
-        {
+        /* {
           name: 'Sex',
           code: 'sex',
           is_sortable: true,
           is_filterable: true,
           datatype: ['male', 'female'],
           query: null
-        },
+        }, */
         {
-          name: 'Phone',
-          code: 'phone',
-          is_sortable: false,
+          name: 'Provider',
+          code: 'sku_provider',
+          is_sortable: true,
           is_filterable: true,
           datatype: 'string',
           query: ''
         },
         {
-          name: 'Email',
-          code: 'email',
-          is_sortable: false,
-          is_filterable: false,
+          name: 'Dropmaze',
+          code: 'sku_dropmaze',
+          is_sortable: true,
+          is_filterable: true,
           datatype: 'string',
           query: ''
         },
@@ -238,7 +238,6 @@ export default {
         q: this.filters.map(val => `${val.code}:${val.query}`).join('||')
       }
       console.log(query, this.objectToQuery(query))
-      // google: object to url
       const meta = { current: 1, total: 5 }
       const { ok, data } = await api.get(`posts${this.objectToQuery(query)}`)
       if (ok) {
